@@ -1,0 +1,160 @@
+/*-- scss:defaults --*/
+
+@import url(./fonts/league-gothic/league-gothic.css);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:ital@0;1&display=swap');
+
+
+.reveal .slides {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Adjust if necessary */
+}
+
+
+.my-custom-image {
+    height: 20% !important;
+    width: auto !important;  // Set width as needed
+}
+
+
+.reveal .scrollable {
+  overflow-y: scroll !important; /* Ensure vertical scrolling works */
+  overflow-x: hidden !important; /* Prevent horizontal scrolling */
+  max-height: 100vh; /* Allow full viewport height for scrolling */
+  padding: 10px; /* Add spacing for readability */
+  font-size: 20px !important; /* Adjust font size to prevent overflow */
+  scrollbar-gutter: stable; /* Ensure consistent scrollbar space */
+}
+
+.reveal .slides {
+  overflow: auto !important; /* Allow scrolling inside the slides container */
+}
+
+html, body {
+  overflow: visible !important; /* Allow browser scrollbars if needed */
+}
+
+@supports (-webkit-appearance: none) {
+  .reveal .scrollable {
+    height: auto; /* Let the browser calculate the height */
+    overflow-y: auto !important; /* Ensure scrollbars work */
+  }
+}
+
+// fonts
+$font-family-sans-serif:  'Open Sans' !default;
+
+// large text
+
+.large-text {
+  font-size: 30px; /* Adjust as needed */
+  font-weight: bold; /* Optional: make the text bold */
+}
+
+.vlarge-text {
+  font-size: 50px; /* Adjust as needed */
+  font-weight: bold; /* Optional: make the text bold */
+}
+
+.small-text {
+  font-size: 12px; /* Adjust as needed */
+  font-weight: bold; /* Optional: make the text bold */
+}
+
+// center
+.center-xy {
+          margin: 0;
+          position: absolute;
+          top: 5%;
+          left: 20%;
+          -ms-transform: translateY(-5%), translateX(-20%);
+          transform: translateY(-5%), translateX(-20%);
+        }
+
+// Ensure all Reveal.js slides use the same font size
+.reveal {
+  font-size: 24px !important;  // This sets the font size for all elements
+}
+
+// colors
+$body-bg: #FFFBEB !default;
+$body-color: #041E42 !default;
+$link-color: #830065 !default;
+$selection-bg: #D50032 !default;
+
+
+// headings
+$presentation-heading-font: "Montserrat", sans-serif !default;
+$presentation-heading-color: #041E42 !default;
+
+
+// code blocks
+$code-block-border-color: #93a1a1 !default;
+
+
+/*-- scss:defaults --*/
+html * {
+  color-profile: sRGB;
+  rendering-intent: auto;
+}
+
+.reveal .footer {
+  font-size: 14px;
+  color: #830065 !important;
+
+}
+
+$link-color: #39729E;
+$text-muted: #6a737b;
+
+/*-- scss:rules --*/
+.hero-banner h2 {
+  color: #39729E;
+  font-size: 1.5rem;
+}
+
+.layout-example {
+  background: #00539B;
+  color: #FFFFFF;
+  text-align: center;
+  margin-bottom: 1em;
+  font-family: $font-family-monospace;
+  font-size: .875em;
+  font-weight: 600;
+  padding-top: 1em;
+  border-radius: 3px;
+}
+
+.left {
+  text-align: left;
+  padding-left: 1em;
+}
+
+.right {
+  text-align: right;
+  padding-right: 1em;
+}
+
+.hello-quarto-banner h1 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+#quarto-announcement {
+  padding: 1em;
+  font-size: 1em;
+  font-weight: bold;
+  color: #FFFFFF;
+  background-color: #00539B; 
+}
+
+#quarto-announcement a {
+  color: #FFFFFF;
+}

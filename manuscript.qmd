@@ -1,0 +1,256 @@
+---
+title: "A miraculous intervention or the normalcy of bias - revisiting asymptomatic aortic stenosis"
+author: 
+  - name: James Brophy MD PhD
+    affiliation: McGill University
+    roles: conception, analysis, writing
+    orcid: 0000-0001-8049-6875
+    email: james.brophy@mcgill.ca
+    corresponding: true
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    css: custom.scss
+  pdf:
+    documentclass: article
+    fig-width: 8
+    fig-height: 12
+    toc: true
+    number-sections: true
+    latex-engine: pdflatex
+    colorlinks: true
+editor: visual
+interactive: false
+bibliography: bib.bib
+csl: vancouver.csl
+---
+
+```{r setup, include=FALSE, warning=FALSE}
+library(knitr)
+# Set global chunk options based on the output format
+output_format <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+if (output_format == "latex") {
+    knitr::opts_chunk$set(echo = FALSE)  # Hide all R code for PDF output
+} else {
+    knitr::opts_chunk$set(echo = TRUE)   # Show R code for other formats
+}
+```
+
+## Introduction 
+
+Surgical aortic valve replacement (SAVR) or transcatheter aortic vale replacement (TAVR) are established treaments for patients with symptomatic aortic stenosis (AS). Following a study of the natural history of AS[@RN50], it was concluded that "operative treatment is the most common cause of sudden death in asymptomatic patients with AS" and consequently it has been standard practice to wait for the appearance of symptoms before proposing an intervention.  However, a recent viewpoint[@RN33] , co-authored one of the previous authors[@RN50] concluded "we believe that the time has come to recommend AVR for asymptomatic patients with severe AS". In support of this evolving viewpoint, they cite four recent randomized clinical trials[@RN29][@RN34][@RN38][@RN7079] and a meta-analysis[@RN53]. Given the potential impact of this major shift in clinical practice, a detailed re-examination of the supporting evidence would seem appropriate.
+
+## Methods
+
+The re-analysis of these RCTs and particularly of EARLY_TAVR, was mildly impeded by the declaration not to share their [data](https://www.nejm.org/doi/suppl/10.1056/NEJMoa2405880/suppl_file/nejmoa2405880_data-sharing.pdf). Notwithstanding this impediment, individual analyses can be approximated by extracting the data from the published cumulative incidence curves using the WebPlotDigitizer software[@WebPlotDigitizer].\   
+
+The cumulative incidence data extracted from each study group, including key time points and numbers at risk, were transformed into a format suitable for survival analysis by simulating individual patient data (IPD). Through interpolating between cumulative incidence values and calculating changes in risk, we estimated events and censorings between these time points. These simulated IPD enabled us to fit Cox proportional hazards models, which allowed for the comparison of simulated and published treatment effects. Additionally, it facilitated the generation of Kaplan-Meier survival curves and the conduct of landmark analyses, providing a comprehensive approach for detailed survival reanalysis using reconstructed patient-level data from aggregated summaries.\    
+
+Analyses were performed using R[@R] and all statistical code is freely available here.
+
+## Results
+The four RCTs that have investigated the role of early intervention compared to clinical surveillance are shown in Table 1. Each study examined a population with severe AS,  performed baseline exercise stress testing to assure asymptomatic status, and had randomized treatment and clinical surveillance arms. Nevertheless, there are major differences between the studies, including the time frames when the studies were performed, the duration of follow-up, in the choice of the the active treatment arm (SAVR, TAVR or both), year 1 and total crossover rates, the choice of primary endpoints, and the intensity and type of follow-up to detect endpoints.\     
+
+Table 2 shows the primary outcome for each of the four trials. The EARLY_TAVR study is approximately double the size of the other three RCTs, which were all essentially SAVR based trials. Given EARLY_TAVR's large size, almost twice the combined size of the other three RCTs, its more contemporary nature, and its exclusive use of TAVR in North American settings, particular attention will be paid to this trial.\   
+
+Figure 1 shows the reconstructed cumulative incidence rates for the four trials and  visually well approximates the published figures. Notwithstanding the differences in the primary endpoints, the most remarkable difference between these four figures, is the extraordinary high EARLY_TAVR's one year rate of the primary outcome, principally driven by cardiac hospitalizations. Bearing in mind, that all patients underwent baseline exercise testing to confirm their asymptomatic status, it is remarkable that the EARLY_TAVR one year event rate in the surveillance arm was between 4 and 7 times the rates of the previous studies where the option for leaving the surveillance group was SAVR. EARLY_TAVR showed a very early and pronounced decrease in the primary outcome at one year, that is not witnessed in the other trials and which dissipates  after year one (Figure 2).\    
+
+A test of the accuracy of the generated IPD datasets and the reconstructed cumulative incidence figures, is to compare the calculated hazard ratios with the published results. Table 3  shows while the published and the calculated hazard ratios are not exactly equal they do generally compare reasonably for all four trials. An advantage of using simulated IPD, as opposed to aggregqate data, is the ability to perform additional time dependent analyses. As EARLY_TAVR showed  pronounced 1 year benefits, this can be quantified with an IPD analysis that censoring data at 1 year and comparing the results with the other trials (Table 3). While EARLY_TAVR exhibited a highly statistically signicant decrease in outcomes at 1 year (HR 0.31 (0.22, 0.43: P <0.0001), this was not observed in the other three trials. Despite this early benefit in EARLY_TAVR, a landmark analysis from 1 year,  as predicted by the nearly parallel cuves in Figure 2, showed no statistically significant benefit for TAVR (HR 0.78, 95%CI 0.59, 1.03; P = 0.08) at later time periods.
+
+
+## Discussion
+
+Four randomized trials investigating the early treatment of asymptomatic AS compared to clinical surveillance have been identified. Although the studies examined similar populations of asymptomatic AS individuals, as confirmed by exercise testing, important heterogeneity exists between the trials, including the choice of active treatment and primary outcome, precluding, in our opinion, the sensible performance of a formal meta-analysis. Not withstanding this opinion, a recent meta-analysis of the same evidence base has been published[@RN53] and concluded "early AVR was associated with a significant reduction in unplanned cardiovascular or HF hospitalization and stroke and no differences in all-cause and cardiovascular mortality compared with clinical surveillance".\    
+
+This meta-analysis conclusion[@RN53] was driven by the EARLY_TAVR study which accounts for 74% of the total number of outcomes (Table 2). The EARLY_TAVR benefit is the only trial to unbiquely employ TAVR in the treatment arm and the only study with dramatic reductions in the primary outcome in the first year following randomization (Table 3). This early benefit contrasts with an absence of early benefit in the trials with surgical interventions. Secondly, patients in all four trials were asymptomatic with negative exercise testing at baseline and it is hard to understand how only EARLY_TAVR patients became so rapidly symptomatic with one year crossover rates approximately double that observed in the other trials (Figure 1). Finally if TAVR really did reduce cardiac hospitalizations is even harder to understand that why this benefit doesn't won't continue to accrue after the first year, yet the landmark analysis shows no such benefit.\     
+
+Given these observations and given also that the natural history of AS has likely not dramatically evolved in the decade since these trials have been performed, it becomes necessary to seek other explanations for the large benefit seen with EARLY_TAVR. What has altered in the past decade is the increasing availability of TAVR as a less invasive alternative to SAVR. Consequently our threshold to intervene has likely changed as “primum non nocere“ in asymptomatic patients becomes less of an issue with the relative ease and safety of TAVR.\    
+
+It is relatively easy to see how this changing threshold for intervnetion combined with the unblinded design of EARLY_TAVR could have influenced the crossover rates and consequently cardiac hospitalizations. The decision to seek medical care and the decision for hospitalization both have subjective components and it has been previously documented that unblinded clinical trials with subjective outcomes have exxagerated effects sizes[RN54][RN55]. \     
+
+Specifically for EARLY_TAVR, there are 4 possible mechanisms that unbindedness, rather than TAVR effectiveness, could have contributed to the observed differences in hospitalization rates. As all patients must sign an informed consent where the risks and benefits of trial participation are explained, the clinical surveillance group knew they had severe disease and knew they were not being treated. This could increase anxiety and favor the conversion from an asymptomatic individual to a symptomatic patient — even in the absence of true cardiac symptoms. Similarly the medical research staff, who are likely "believers" in the value of TAVR, knew which patients were not treated thereby increasing their probability of attributing any symptoms, whether of cardiac origin or not, to the underlying aortic stenosis. On the other hand, the early treatment group knew they were “fixed” and might be less likely to consult for any symptoms, again whether cardiac or not. The medical staff of the early TAVR patients knowing these patients had been treatedmight also be less inclined to attribute any symptoms to the underlying valve disease. Importantly, all four of these possible scenarios would lead to a potential over-estimate of TAVR benefit in reducing hospitalizations.\      
+
+This viewpoint and analysis is limited by the lack of the origianl data as the individual trialists refuse data sharing. However, the ability to reasonably reproduce the published hazard ratios does provides some assurance that the early censored and landmark analyses reported herein are valid. These analyses strongly support the opinion that the EARLY_TAVR benefit is more likley due to bias from unblinding than an actual benefit from early interventions in asymptomatic individuals.\     
+
+Ultimately, the reader must determine whether EARLY_TAVR's differences are due to a truly miraculous intervention TAVR effect or the normalcy of bias from an unblinded design. if TAVR truly decreases cardiac hospitalizations which scenario is more likely to be observed. A scenario with a benefit occurring very early, for example in the first year, with no longer term benefits  or a scenario where the benefit persists throughout the follow-up at a constant rate or perhaps even  slightly increasing with time. Logic would dictate the later scenario is more likely if TAVR has a real impact but the landmark analysis is compatible with former scenario, suggesting the observed difference is more likely due to bias from the unblinded design. This is also supported by EARLY_TAVR's lack of benefit for the objective outcomes of death or stroke, past empirical evidence of bias in measuring subjective outcomes in unblinded trials and the lack of a comparable early benefit with SAVR interventions. \     
+
+In conclusion, while the heterogeneity between the four completed randomized trials of early intervention versus clinical surveillance preclude a formal meta-analysis, an in depth analysis of the time patterns of event occurrences suggests the large early benefit observed in EARLY_TAVR is not due to the intervention but rather due to unblinding bias. While a recent viewpoint[RN33] has called for a modification of current guidelines[OTTO2021e25] for the treatment of asymptomatic aortic stenosis, this analysis suggests such a change would be premature and currently unjustified.
+
+## Tables
+
+```{r table1, warning=FALSE, message=FALSE}
+library(gt)
+library(dplyr)
+data_meta <- read.csv("references/data_meta.csv")
+# Replace underscores in column names with spaces
+names(data_meta) <- gsub("_", " ", names(data_meta)) 
+colnames(data_meta)[1] <- "Study (n1=intervention, n2=surveillance)"
+colnames(data_meta)[6] <- "Median Follow-up (years)"
+colnames(data_meta)[7] <- "Crossovers study end (%)"
+colnames(data_meta)[8] <- "Crossovers 1 yeart (%)"
+
+# Assuming data_meta is already loaded and columns named appropriately
+gt_table <- gt(data_meta[,c(1:8)]) %>%
+  cols_width(
+    .list = list(
+      everything() ~ px(50)  # Adjust width as needed
+    )
+  ) %>%
+  tab_header(
+    title = "Table 1 Summary of Randomized Clinical Trials",
+    subtitle = "Key summary data data from from early AS intervention trials."
+  ) %>%
+  tab_source_note(
+    source_note = "1 year crossovers for RECOVERY and AVATAR are approximated by assuming a normal distribution for the timing distribution of total crossovers. As this distribution is likely right skewed these approximations will overestimate the 1 year crossovers."
+  ) %>%
+  tab_options(
+    table.font.size = px(10),  # Smaller font size to reduce space
+    data_row.padding = px(5)  # Reduce padding to fit more content
+  )
+
+gt_table #ok for html
+
+# Convert gt table to LaTeX and use resizebox to scale
+# Use LaTeX directly to control the output size
+
+```
+
+
+```{r table2, warning=FALSE, message=FALSE}
+# Assuming data_meta is already loaded and columns named appropriately
+colnames(data_meta)[10] <- "Primary endpoints (intervention)"
+colnames(data_meta)[12] <- "Primary endpoints (surveillance)"
+colnames(data_meta)[13] <- "Mortality (intervention)"
+colnames(data_meta)[14] <- "Mortality (surveillance)"
+colnames(data_meta)[15] <- "Hospitalizations (intervention)"
+colnames(data_meta)[16] <- "Hospitalizations (surveillance)"
+colnames(data_meta)[17] <- "Stroke (intervention)"
+colnames(data_meta)[18] <- "Stroke (surveillance)"
+gt_table <- gt(data_meta[,c(1,10, 12:18)]) %>%
+  cols_width(
+    .list = list(
+      everything() ~ px(50)  # Adjust width as needed
+    )
+  ) %>%
+  tab_header(
+    title = "Table 2 Outcomes of Randomized Clinical Trials",
+    subtitle = "Primary ann secondardy outcomes from early AS intervention trials."
+  ) %>%
+  tab_source_note(
+    source_note = ""
+  ) %>%
+  tab_options(
+    table.font.size = px(10),  # Smaller font size to reduce space
+    data_row.padding = px(5)  # Reduce padding to fit more content
+  )
+
+gt_table #ok for html
+
+# Convert gt table to LaTeX and use resizebox to scale
+# Use LaTeX directly to control the output size
+
+```
+
+```{r table3, warning=FALSE, message=FALSE}
+library(gt)
+library(dplyr)
+data_meta_HR <- read.csv("references/data_meta_HR.csv")
+# Replace underscores in column names with spaces
+names(data_meta_HR) <- gsub("_", " ", names(data_meta_HR)) 
+colnames(data_meta_HR)[1] <- "Study (n1=intervention, n2=surveillance)"
+colnames(data_meta_HR)[2] <- "Published HR (95% CI, P value)"
+colnames(data_meta_HR)[3] <- "Calculated HR (95% CI, P value)"
+
+# Assuming data_meta is already loaded and columns named appropriately
+gt_table <- gt(data_meta_HR) %>%
+  cols_width(
+    .list = list(
+      everything() ~ px(50)  # Adjust width as needed
+    )
+  ) %>%
+  tab_header(
+    title = "Table 3 Published and calculated HR (95% CI, P value)",
+    subtitle = "For primary outcome from early AS intervention trials."
+  ) %>%
+  tab_source_note(
+    source_note = "HR = hazard ratio, CI = confidence interval, NA = not available due to insufficient data"
+  ) %>%
+  tab_options(
+    table.font.size = px(10),  # Smaller font size to reduce space
+    data_row.padding = px(5)  # Reduce padding to fit more content
+  )
+
+gt_table #ok for html
+
+# Convert gt table to LaTeX and use resizebox to scale
+# Use LaTeX directly to control the output size
+
+```
+
+
+```{r eval=FALSE, echo=FALSE}
+# for pdf version 
+library(knitr)
+library(kableExtra)
+
+
+data_meta <- read.csv("references/data_meta.csv")
+# Replace underscores in column names with spaces
+names(data_meta) <- gsub("_", " ", names(data_meta))
+
+kable(data_meta, "latex", booktabs = TRUE) %>%
+  kable_styling(font_size = 7) %>%
+  column_spec(1, width = "5cm")  # Control the width of specific columns
+
+```
+
+## Figures
+
+```{r fig1, message=FALSE, warning=FALSE, fig.height=12}
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+source("CIplot_function.R")
+g1 <- CIplot("references/RECOVERY_Ctl.csv", "references/RECOVERY_Sx.csv", 
+         "surveillance", "surgery", "RECOVERY")
+
+g2 <- CIplot("references/AVATAR_Ctl.csv", "references/AVATAR_Sx.csv", 
+       "surveillance", "surgery", "AVATAR", time_unit = "months")
+
+g3 <- CIplot("references/EVOLVED_Ctl.csv", "references/EVOLVED_Sx.csv", 
+       "surveillance", "75% SAVR, 25% TAVR", "EVOLVED")
+
+
+g4 <- CIplot("references/EARLY_Ctl.csv", "references/EARLY_TAVR.csv", 
+       "surveillance", "TAVR", "EARLY_TAVR", max_y = 60)
+
+# Combine plots
+combined_plot <- g1 + g2 + g3 + g4 +
+  plot_annotation(title = 'Figure 1. Cumulative incidence plots of 4 RCTs \n(based on simulated data)') &
+  theme(plot.title = element_text(size = 16, face = "bold", hjust = 0.5))
+
+# Print to check result
+print(combined_plot)
+
+# If you need to save the plot, you can use ggsave
+ggsave("Output/combined_plot.png", combined_plot, width = 12, height = 8)
+
+```
+
+```{r fig2, message=FALSE, warning=FALSE, fig.height=12}
+source("CIplot_landmark_function.R")
+g5 <- CIplot_landmark("references/EARLY_Ctl.csv", "references/EARLY_TAVR.csv", 
+       "surveillance", "TAVR", "EARLY_TAVR", max_y = 60)
+
+g5 +
+  plot_annotation(title = 'Figure 2') &
+  theme(plot.title = element_text(size = 16, face = "bold", hjust = 0.5))
+
+# If you need to save the plot, you can use ggsave
+ggsave("TAVR_landmark_plot.png", width = 12, height = 8)
+```
+
+## References
